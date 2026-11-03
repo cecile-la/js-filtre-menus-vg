@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "titre": "Menu de Noël",
+        "description": "Foie gras, chapon aux marrons, bûche au chocolat.",
+        "theme": "noel",
+        "regime": "classique",
+        "nombrePersonnesMinimum": 6,
+        "prixPourPersonnesMinimum": 210
+    },
+    {
+        "id": 2,
+        "titre": "Menu de Pâques végétarien",
+        "description": "Œufs mimosa, tarte aux asperges, nid de Pâques.",
+        "theme": "paques",
+        "regime": "vegetarien",
+        "nombrePersonnesMinimum": 6,
+        "prixPourPersonnesMinimum": 150
+    },
+    {
+        "id": 3,
+        "titre": "Menu classique vegan",
+        "description": "Velouté de potimarron, chili sin carne, poires pochées.",
+        "theme": "classique",
+        "regime": "vegan",
+        "nombrePersonnesMinimum": 4,
+        "prixPourPersonnesMinimum": 80
+    }
+]
