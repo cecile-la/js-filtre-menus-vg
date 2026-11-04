@@ -13,3 +13,4 @@ Le projet suit le cours de JavaScript de ma formation. Notation : **B** = bloc, 
 | Étape | Ressources | Notions | Tag |
 |---|---|---|---|
 | Chargement des menus | B3M6 (ProgJS) R3-4 | fichier JSON (données des menus), `fetch` et `response.json()` avec `async` / `await` (charger les menus, deux attentes), `for/of`, `createElement`, `textContent`, `appendChild` (afficher la liste des titres dans la page) | `etape-fetch` |
+| Filtre par prix | B3M6 (ProgJS) R6 | champ `<input type="number">` et `<label for>` (saisir le prix, relier le libellé au champ), `addEventListener` sur l'événement `input` (réagir à chaque frappe), `Number()` et `Number.isNaN()` (lire et vérifier la saisie), `filter()` avec une fonction fléchée (garder les menus sous le prix maximum), `textContent = ""` (vider la liste et le message avant chaque affichage), `.length` et `role="status"` (message annoncé quand aucun menu ne correspond) | `etape-filtre-prix` |
