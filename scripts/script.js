@@ -1,12 +1,12 @@
 /*
  * Filtre des menus — Vite & Gourmand (traiteur fictif)
  * ----------------------------------------------------
- * Ce script charge la liste des menus depuis un fichier JSON
- * et l'affiche dans la page, sans rechargement.
- * Les filtres (prix, thème, régime) s'appuient sur ces deux fonctions.
+ * Ce script charge la liste des menus depuis un fichier JSON,
+ * l'affiche dans la page, et la filtre par prix maximum, sans rechargement.
  *
  * Fonctionnement : chargerMenus() récupère les données,
- * afficherMenus() les écrit dans la page, demarrer() enchaîne les deux.
+ * afficherMenus() les écrit dans la page, surSaisiePrix() filtre
+ * à chaque frappe, demarrer() charge, affiche et branche le filtre.
  *
  * À lancer avec Live Server (http://127.0.0.1:5500) :
  * ouvert en file://, le navigateur bloque fetch.
@@ -20,6 +20,9 @@ const cheminFichierMenus = "data/menus.json";
 // Trouvée dès le départ grâce à defer : le HTML est déjà analysé
 const zoneListe = document.getElementById("liste-menus");
 
+// Zone de la page où afficher un message sur la liste (index.html)
+const zoneMessage = document.getElementById("message-menus");
+
 // Champ du prix maximum (index.html)
 // Écrit dans le HTML : il existe toujours, même si le chargement échoue
 const champPrixMaximum = document.getElementById("filtre-prix-menus");
@@ -27,6 +30,7 @@ const champPrixMaximum = document.getElementById("filtre-prix-menus");
 // Liste partagée des menus chargés
 // (remplie dans demarrer, relue par surSaisiePrix)
 let menusCharges = [];
+
 
 /* -------------------------------- Fonctions -------------------------------- */
 
@@ -39,13 +43,18 @@ async function chargerMenus() {
     return menus;
 }
 
-// Affiche une ligne par menu reçu.
-// Séparée du chargement : le filtre la rappellera avec une partie des menus,
+// Affiche une ligne par menu reçu, ou un message si aucun menu n'est reçu.
+// Séparée du chargement : le filtre la rappelle avec une partie des menus,
 // sans recharger le fichier.
 function afficherMenus(menus) {
-    // Vide la liste avant d'afficher : sinon les nouvelles lignes
-    // s'ajoutent sous les anciennes à chaque saisie
+    // Vide la liste et le message avant d'afficher : sinon les anciennes
+    // lignes et l'ancien message restent à chaque saisie
     zoneListe.textContent = "";
+    zoneMessage.textContent = "";
+    if (menus.length === 0) {
+        zoneMessage.textContent = "Aucun menu ne correspond à la recherche.";
+    }
+
     for (const menu of menus) {
         const ligneMenu = document.createElement("li");
         // textContent et pas innerHTML : le texte n'est jamais exécuté (XSS)
